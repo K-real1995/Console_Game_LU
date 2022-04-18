@@ -1,4 +1,4 @@
-package Strategy;
+package strategy;
 
 import characters.Unit;
 import things.Item;
@@ -11,7 +11,7 @@ import java.util.Random;
 import static things.ItemFabric.getRandomBreastArmour;
 import static things.ItemFabric.getRandomMeleeWeapon;
 
-public class GetWeakCharacter implements Strategy{
+public class GetWeakCharacter implements Strategy {
     //Метод создающий слабого юнита
     @Override
     public void makeUnit(Unit unit){

@@ -1,11 +1,16 @@
 package characters.aliance;
 
+import abstractFabric.AbstractUnitFactory;
 import characters.Unit;
+import things.ItemFabric;
 import things.armour.Armour;
 import things.Item;
+import things.armour.BreastАrmour;
+import things.weapons.MeeleWeapon;
 import things.weapons.Weapon;
 
 import java.util.ArrayList;
+import java.util.Random;
 
 public class Human extends AllianceUnit {
 
@@ -63,4 +68,6 @@ public class Human extends AllianceUnit {
         target.moneyCount = 0;
 
     }
+
 }
+

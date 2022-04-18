@@ -1,6 +1,6 @@
 package characters;
 
-import Strategy.Strategy;
+import strategy.Strategy;
 import characters.aliance.AllianceUnit;
 import characters.horde.HordeUnit;
 import things.Item;

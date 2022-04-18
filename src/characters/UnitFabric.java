@@ -96,8 +96,7 @@ public class UnitFabric {
         }
 
         public static int getRandomMoneyCount () {
-            int i = new Random().nextInt(1, 1001);
-            return i;
+            return new Random().nextInt(1, 1001);
         }
 
         public static ArrayList<Item> getInventory () {

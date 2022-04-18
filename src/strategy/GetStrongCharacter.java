@@ -1,4 +1,4 @@
-package Strategy;
+package strategy;
 
 import characters.Unit;
 import things.Item;

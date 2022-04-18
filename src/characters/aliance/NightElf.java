@@ -7,7 +7,7 @@ import things.weapons.Weapon;
 
 import java.util.ArrayList;
 
-public class NightElf extends AllianceUnit {
+public class NightElf extends AllianceUnit{
 
     public NightElf(String name, int hp, int attack, int defence, int moneyCount, Weapon weapon, Armour armour,
                     ArrayList<Item> inventory, int maxWeight){
@@ -63,4 +63,5 @@ public class NightElf extends AllianceUnit {
         target.moneyCount = 0;
 
     }
+
 }
