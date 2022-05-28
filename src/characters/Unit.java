@@ -3,32 +3,60 @@ package characters;
 import strategy.Strategy;
 import characters.aliance.AllianceUnit;
 import characters.horde.HordeUnit;
+import things.Inventory;
 import things.Item;
 import things.armour.Armour;
 import things.weapons.Weapon;
 
+import javax.persistence.*;
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.LinkedList;
 
 import static characters.UnitFabric.*;
 
 
-public class Unit implements UnitInterface, Serializable {
-    public ArrayList<Item> inventory;
-    public String name;
-    public int hp;
-    public int attack;
-    public int defence;
-    public int moneyCount;
-    public Weapon weapon;
-    public Armour armour;
-    public int maxWeight;
+@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
+@Entity
+@Table(name = "units")
+@DiscriminatorColumn(name = "race", discriminatorType = DiscriminatorType.STRING)
+public abstract class Unit implements UnitInterface, Serializable {
+    @Id
+    @GeneratedValue (strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
+    private int id;
+    @Column(name = "name")
+    private String name;
+    @Column(name = "hp")
+    private int hp;
+    @Column(name = "attack")
+    private int attack;
+    @Column(name = "defence")
+    private int defence;
+    @Column(name = "money_count")
+    private int moneyCount;
+
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "weapon_id")
+    private Weapon weapon;
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "armour_id")
+    private Armour armour;
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "inventory_id")
+    private Inventory inventory;
+
+    @Column(name = "max_weight")
+    private int maxWeight;
+
+    @Transient
     Strategy strategy;
 
 
-    public Unit(String name, int hp, int attack, int defence, int moneyCount, Weapon weapon, Armour armour,
-                ArrayList<Item> inventory, int maxWeight){
+
+
+    public Unit(String name, int hp, int attack, int defence, int moneyCount, Inventory inventory, Weapon weapon,
+                Armour armour, int maxWeight){
+
         this.name = name;
         this.hp = hp;
         this.attack = attack;
@@ -38,15 +66,14 @@ public class Unit implements UnitInterface, Serializable {
         this.weapon = weapon;
         this.armour = armour;
         this.maxWeight = maxWeight;
-
     }
 
     public Unit() {
     }
 
 
-    //Для двух полей выше разработать механизм прочности, когда при битвах прочность оружия и брони уменьшается.
-    //В случае, когда прочность достигнет 0 эффекты которые дают предметы должны перестать работать
+//    Для двух полей выше разработать механизм прочности, когда при битвах прочность оружия и брони уменьшается.
+//    В случае, когда прочность достигнет 0 эффекты которые дают предметы должны перестать работать
     public void attack(Unit target){
         int damage;
 
@@ -92,14 +119,16 @@ public class Unit implements UnitInterface, Serializable {
 
 
     //Метод подсчитывающий общий вес инвентаря
-    public int getInventoryWeight(ArrayList<Item> target){
+    @Override
+    public int getInventoryWeight(Inventory inventory){
         int totalInventoryWeight = 0;
-        for (Item item : target) {
+        for (Item item : inventory) {
             int weight = item.itemWeight;
             totalInventoryWeight += weight;
         }
         return totalInventoryWeight;
     }
+
 
     public static LinkedList<HordeUnit> getRandomHordeArmy () {
         LinkedList<HordeUnit> hordeArmy = new LinkedList<>();
@@ -128,7 +157,101 @@ public class Unit implements UnitInterface, Serializable {
 
     }
 
+    @Override
+    public String toString() {
+        return "Unit{" +
+                "id=" + id +
+                ", inventory=" + inventory +
+                ", name='" + name + '\'' +
+                ", hp=" + hp +
+                ", attack=" + attack +
+                ", defence=" + defence +
+                ", moneyCount=" + moneyCount +
+                ", weapon=" + weapon +
+                ", armour=" + armour +
+                ", maxWeight=" + maxWeight +
+                ", strategy=" + strategy +
+                '}';
+    }
 
+    public Inventory getInventory() {
+        return inventory;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public int getHp() {
+        return hp;
+    }
+
+    public void setHp(int hp) {
+        this.hp = hp;
+    }
+
+    public int getAttack() {
+        return attack;
+    }
+
+    public void setAttack(int attack) {
+        this.attack = attack;
+    }
+
+    public int getDefence() {
+        return defence;
+    }
+
+    public void setDefence(int defence) {
+        this.defence = defence;
+    }
+
+    public int getMoneyCount() {
+        return moneyCount;
+    }
+
+    public void setMoneyCount(int moneyCount) {
+        this.moneyCount = moneyCount;
+    }
+
+    public Weapon getWeapon() {
+        return weapon;
+    }
+
+    public void setWeapon(Weapon weapon) {
+        this.weapon = weapon;
+    }
+
+    public Armour getArmour() {
+        return armour;
+    }
+    public int getMaxWeight() {
+        return maxWeight;
+    }
+
+    public void setMaxWeight(int maxWeight) {
+        this.maxWeight = maxWeight;
+    }
+
+    public Strategy getStrategy() {
+        return strategy;
+    }
+    public int getId() {
+    return id;
 }
 
+    public void setId(int id) {
+        this.id = id;
+    }
 
+    public void setArmour(Armour armour) {
+        this.armour = armour;
+    }
+    public void setInventory(Inventory inventory) {
+        this.inventory = inventory;
+    }
+}

@@ -1,15 +1,14 @@
 package strategy;
 
 import characters.Unit;
-import things.Item;
+import things.Inventory;
 import things.armour.BreastАrmour;
 import things.weapons.MeeleWeapon;
-
-import java.util.ArrayList;
 import java.util.Random;
 
 import static things.ItemFabric.getRandomBreastArmour;
 import static things.ItemFabric.getRandomMeleeWeapon;
+
 
 public class GetWeakCharacter implements Strategy {
     //Метод создающий слабого юнита
@@ -34,19 +33,19 @@ public class GetWeakCharacter implements Strategy {
         BreastАrmour armor = getRandomBreastArmour();
         int randomMaxWeight = num6.nextInt(1, 1501);
 
-        ArrayList<Item> inventory = new ArrayList<>();
+        String[] inventoryNames = {"Рюкзачок", "Сумка", "Багаж", "Cаквояж"};
+        Inventory inventory = new Inventory(inventoryNames[new Random().nextInt(inventoryNames.length)]);
 
-        unit.name = unitName;
-        unit.hp = randomHp;
-        unit.attack = randomAttack;
-        unit.defence = randomDefence;
-        unit.moneyCount = randomMoneyCount;
-        unit.inventory = inventory;
-        unit.weapon = weapon;
-        unit.armour = armor;
-        unit.maxWeight = randomMaxWeight;
+        unit.setName(unitName);
+        unit.setHp(randomHp);
+        unit.setAttack(randomAttack);
+        unit.setDefence(randomDefence);
+        unit.setMoneyCount(randomMoneyCount);
+        unit.setInventory(inventory);
+        unit.setWeapon(weapon);
+        unit.setArmour(armor);
+        unit.setMaxWeight(randomMaxWeight);
 
 
     }
-
 }

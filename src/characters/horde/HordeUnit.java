@@ -1,18 +1,21 @@
 package characters.horde;
 
 import characters.Unit;
+import things.Inventory;
 import things.armour.Armour;
-import things.Item;
 import things.weapons.Weapon;
 
-import java.util.ArrayList;
+import javax.persistence.Entity;
+
 
 public abstract class HordeUnit extends Unit {
 
-    public HordeUnit(String name, int hp, int attack, int defence, int moneyCount, Weapon weapon, Armour armour,
-                     ArrayList<Item> inventory, int maxWeight){
-        super(name, hp, attack, defence, moneyCount, weapon, armour, inventory, maxWeight);
+    public HordeUnit(String name, int hp, int attack, int defence, int moneyCount, Inventory inventory, Armour armour, Weapon weapon, int maxWeight){
+        super(name,hp,attack,defence,moneyCount,inventory, weapon, armour,maxWeight);
 
+    }
+
+    protected HordeUnit() {
     }
 
     @Override
@@ -20,12 +23,10 @@ public abstract class HordeUnit extends Unit {
     }
 
     @Override
-    public int getInventoryWeight(ArrayList<Item> target){
+    public int getInventoryWeight(Inventory inventory){
         return 0;
     }
 
     public void drop(Unit target){
     }
-
-
 }

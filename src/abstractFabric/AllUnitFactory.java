@@ -4,12 +4,10 @@ import characters.aliance.Human;
 import characters.aliance.NightElf;
 import characters.horde.Orc;
 import characters.horde.Tauren;
-import things.Item;
+import things.Inventory;
 import things.ItemFabric;
 import things.armour.BreastАrmour;
 import things.weapons.MeeleWeapon;
-
-import java.util.ArrayList;
 import java.util.Random;
 
 public class AllUnitFactory implements AbstractUnitFactory{
@@ -26,7 +24,8 @@ public class AllUnitFactory implements AbstractUnitFactory{
         int moneyCount = new Random().nextInt(1, 1001);
         BreastАrmour armour = ItemFabric.getRandomBreastArmour();
         MeeleWeapon weapon = ItemFabric.getRandomMeleeWeapon();
-        ArrayList<Item> inventory = new ArrayList<>();
+        String[] inventoryNames = {"Рюкзачок", "Сумка", "Багаж", "Cаквояж"};
+        Inventory inventory = new Inventory(inventoryNames[new Random().nextInt(inventoryNames.length)]);
         int maxWeight = new Random().nextInt(1000, 2001);
 
         return new Human(humanName,hp,attack,defence, moneyCount,weapon,armour, inventory, maxWeight);
@@ -43,7 +42,8 @@ public class AllUnitFactory implements AbstractUnitFactory{
         int moneyCount = new Random().nextInt(1, 1001);
         BreastАrmour armour = ItemFabric.getRandomBreastArmour();
         MeeleWeapon weapon = ItemFabric.getRandomMeleeWeapon();
-        ArrayList<Item> inventory = new ArrayList<>();
+        String[] inventoryNames = {"Рюкзачок", "Сумка", "Багаж", "Cаквояж"};
+        Inventory inventory = new Inventory(inventoryNames[new Random().nextInt(inventoryNames.length)]);
         int maxWeight = new Random().nextInt(1000, 2001);
 
         return new Orc(orcName,hp,attack,defence, moneyCount,weapon,armour, inventory, maxWeight);
@@ -60,7 +60,8 @@ public class AllUnitFactory implements AbstractUnitFactory{
         int moneyCount = new Random().nextInt(1, 1001);
         BreastАrmour armour = ItemFabric.getRandomBreastArmour();
         MeeleWeapon weapon = ItemFabric.getRandomMeleeWeapon();
-        ArrayList<Item> inventory = new ArrayList<>();
+        String[] inventoryNames = {"Рюкзачок", "Сумка", "Багаж", "Cаквояж"};
+        Inventory inventory = new Inventory(inventoryNames[new Random().nextInt(inventoryNames.length)]);
         int maxWeight = new Random().nextInt(1000, 2001);
 
         return new NightElf(nightElfName,hp,attack,defence, moneyCount,weapon,armour, inventory, maxWeight);
@@ -78,7 +79,8 @@ public class AllUnitFactory implements AbstractUnitFactory{
         int moneyCount = new Random().nextInt(1, 1001);
         BreastАrmour armour = ItemFabric.getRandomBreastArmour();
         MeeleWeapon weapon = ItemFabric.getRandomMeleeWeapon();
-        ArrayList<Item> inventory = new ArrayList<>();
+        String[] inventoryNames = {"Рюкзачок", "Сумка", "Багаж", "Cаквояж"};
+        Inventory inventory = new Inventory(inventoryNames[new Random().nextInt(inventoryNames.length)]);
         int maxWeight = new Random().nextInt(1000, 2001);
 
         return new Tauren(taurenName,hp,attack,defence, moneyCount,weapon,armour, inventory, maxWeight);

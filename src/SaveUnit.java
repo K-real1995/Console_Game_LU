@@ -2,7 +2,7 @@ import characters.Unit;
 import java.io.*;
 
 public class SaveUnit {
-
+    //Методы для сохранения и загрузки персонажей
     public static void saveUnit(Unit target) throws IOException {
         ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream("unit.txt"));
         out.writeObject(target);
